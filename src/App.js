@@ -12,20 +12,22 @@ function App() {
   return (
     <div>
       {!dialog && <Button onClick={() => setDialog(true)}>FOODS</Button>}
-      {dialog && (
-        <Paper data-test-id="menu">
-          {foods.map((food, index) => (
-            <MenuItem
-              onClick={() => {
-                setSelectedFood(index);
-                setDialog(false);
-              }}
-            >
-              {food}
-            </MenuItem>
-          ))}
-        </Paper>
-      )}
+      <Popper data-test-id="menu" open={dialog}>
+        <div>
+          <Paper>
+            {foods.map((food, index) => (
+              <MenuItem
+                onClick={() => {
+                  setSelectedFood(index);
+                  setDialog(false);
+                }}
+              >
+                {food}
+              </MenuItem>
+            ))}
+          </Paper>
+        </div>
+      </Popper>
       {selectedFood !== undefined && (
         <div>
           The food you have selected is <span>{foods[selectedFood]}</span>
